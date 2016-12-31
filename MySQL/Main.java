@@ -1,6 +1,6 @@
-import java.sql.Connection;
+package MySQL;
+
 import java.sql.SQLException;
-import java.util.Timer;
 
 /**
  * Created by alsayed on 12/31/16.
