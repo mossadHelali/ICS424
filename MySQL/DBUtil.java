@@ -9,7 +9,7 @@ public class DBUtil {
 
     private static final String USERNAME = "alsayed";
     private static final String PASSWORD = "alsayed";
-    private static final String JDBC = "jdbc:mysql://localhost:3306/ICS424";
+    private static final String JDBC = "jdbc:mysql://localhost:3306/ICS424?autoReconnect=true&useSSL=false";
 
     public static Connection getConnection() throws SQLException{
         Connection conn = DriverManager.getConnection(JDBC,USERNAME, PASSWORD);

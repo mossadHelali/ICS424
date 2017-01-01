@@ -4,6 +4,27 @@ package MySQL; /**
 import java.sql.*;
 public class PersonManager {
 
+    public static boolean createPerson(String name) throws SQLException{
+        String sql = "INSERT INTO PERSONS VALUES (?, ?)";
+
+        // creating connection: this form of try is used to close resources after execution
+        try(Connection connection = DBUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);){
+
+            statement.setString(1, null);
+            statement.setString(2, name);
+
+            int affected = statement.executeUpdate();
+
+            if(affected == 1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    }
+
     public static Person getPersonById(int id) throws SQLException{
 
         // sql query

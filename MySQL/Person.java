@@ -5,6 +5,7 @@ package MySQL;
  */
 
 public class Person {
+    public static int PERSON_ROWS = 630;
     private int id;
     private String name;
 
