@@ -45,43 +45,50 @@ public class Main {
 //        for(int i = 0; i < 1000; i++){
 //        	String name = boys[rnd.nextInt(1000)] + " " + girls[rnd.nextInt(1000)];
 //        	
-//        	session.run("create (n:Man {name: \"" + name +  "\"})");
+//        	session.run("create (n:Man {name: \"" + name +  "\", id: " + i + "})");
 //        	
 //        }
-//		
+		
        
         
 		
 		
         // add 0-100 relations per man node 
         
-        for(int i = 7; i<2000; i++){
-        	
-        	
-        	int iterations = rnd.nextInt(100);
-        	
-        	for(int k = 0; k<iterations; k++){
-            	int j = rnd.nextInt(2000) + 6;
+//        for(int i = 0; i < 1000; i++){
+//        	
+//        	
+//        	int iterations = rnd.nextInt(100);
+//        	
+//        	for(int k = 0; k < iterations; k++){
+//            	int j = rnd.nextInt(1000);
+//            	j = j == i? rnd.nextInt(1000) : j;
+//            	
+//        		String addRelationQuery = "match (n:Man) where n.id = " + i + " match(m:Man) where m.id = " + j + " create (n)-[:helps]->(m)";
+//        		
+//        		session.run(addRelationQuery);
+//        	}
+//        	
+//        }
 
-        		String addRelationQuery = "match (n:Man) where id(n) = " + i + " match(m:Man) where id(m) = " + j + " create (n)-[:cleans]->(m)";
-        		
-        		session.run(addRelationQuery);
-        	}
-        	
-        }
-        long t2 = System.currentTimeMillis();
-        System.out.println("Time: " + (t2-t1)/1000.0);
         
 		
-/*		// search for all person nodes
-		StatementResult sr = session.run("match (n) return n.name as name");
+		// search for all person nodes
+        String searchConnectedNodesQuery = "match (n:Man)<-[:helps]-(m) where n.id = 650 return m.id as id";
+        String getAllNodesQuery = "match (n) return n.name as name";
+        
+		StatementResult sr = session.run(searchConnectedNodesQuery);
 		
 		
 		while(sr.hasNext()){
 			Record record = sr.next();
-			System.out.println(record.get("name").asString());
+			System.out.println(record.get("id").asInt());
 		}
-*/
+        long t2 = System.currentTimeMillis();
+        System.out.println("Time: " + (t2-t1)/1000.0);
+        
+        
+        
 		
 		session.close();
 		driver.close();
